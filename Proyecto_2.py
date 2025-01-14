@@ -26,3 +26,18 @@ plt.xticks(rotation=90)
 
 plt.show() #Diagrama de barras con frecuencia de fallecidos por municipio
 
+vacunados = pd.read_csv("Asignacion_vacuna_contra_COVID-19.csv", sep=",")
+vacunas_lab = vacunados['Laboratorio_Vacuna'].value_counts()
+print(vacunas_lab)
+
+plt.figure(figsize=(8, 8))  
+plt.pie(
+    vacunas_lab, 
+    labels=vacunas_lab.index, 
+    autopct='%1.1f%%', 
+    startangle=90, 
+    textprops={'fontsize': 10}
+)
+plt.title("Distribución de Vacunas Aplicadas por Laboratorio")
+plt.axis('equal')  
+plt.show()
