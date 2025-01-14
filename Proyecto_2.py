@@ -3,6 +3,8 @@ import pandas as pd
 import os
 import warnings
 import seaborn as sns
+import plotly.express as px
+from plotly.offline import plot
 
 warnings.filterwarnings("ignore")
 
@@ -48,4 +50,18 @@ sns.histplot(data=vacunados,x="Laboratorio_Vacuna", bins=10)
 plt.title("Frecuencia de Vacunas Aplicadas")
 plt.xlabel("Laboratorio Vacuna")
 plt.ylabel("Frecuencia")
-plt.show()
+plt.show() # Histograma "Frecuncia de Vacunas Aplicadas" con Seaborn
+
+data_plotly = pd.DataFrame({
+    'Municipio': frecuencia_municipios.index,
+    'Frecuencia': frecuencia_municipios.values
+})
+fig = px.bar(data_plotly, 
+             x='Municipio', 
+             y='Frecuencia', 
+             title='Frecuencia de Fallecidos por Municipio (Top 10)',
+             labels={'Frecuencia': 'Número de Fallecidos', 'Municipio': 'Nombre Municipio'})
+fig.update_layout(xaxis_title="Municipios",
+                  yaxis_title="Frecuencia de Fallecidos",
+                  xaxis_tickangle=45)
+plot(fig)
