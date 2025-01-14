@@ -2,6 +2,8 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import os
 import warnings
+import seaborn as sns
+
 warnings.filterwarnings("ignore")
 
 path = os.getcwd()
@@ -27,9 +29,9 @@ plt.xticks(rotation=90)
 plt.show() #Diagrama de barras con frecuencia de fallecidos por municipio
 
 vacunados = pd.read_csv("Asignacion_vacuna_contra_COVID-19.csv", sep=",")
-vacunas_lab = vacunados['Laboratorio_Vacuna'].value_counts()
-print(vacunas_lab)
-
+#vacunas_lab = vacunados['Laboratorio_Vacuna'].value_counts()
+#print(vacunas_lab)
+"""""
 plt.figure(figsize=(8, 8))  
 plt.pie(
     vacunas_lab, 
@@ -40,4 +42,10 @@ plt.pie(
 )
 plt.title("Distribución de Vacunas Aplicadas por Laboratorio")
 plt.axis('equal')  
+plt.show() # Pie Chart porcentaje de vacunas apliacadas por laboratorio de vacuna
+"""
+sns.histplot(data=vacunados,x="Laboratorio_Vacuna", bins=10)
+plt.title("Frecuencia de Vacunas Aplicadas")
+plt.xlabel("Laboratorio Vacuna")
+plt.ylabel("Frecuencia")
 plt.show()
